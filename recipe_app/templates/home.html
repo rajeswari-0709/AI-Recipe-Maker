@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>AI Recipe Maker</title>
+
+    {% load static %}
+
+    <link rel="stylesheet"
+          href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topbar">
+
+        <h1>🍳 Snap, Speak & Cook</h1>
+
+        <div>
+
+            <a href="/history/">
+                History
+            </a>
+
+            <a href="/logout/">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <label>
+                Ingredients
+            </label>
+
+            {{ form.ingredients }}
+
+            <button
+                type="button"
+                onclick="startVoice()">
+
+                🎤 Speak Ingredients
+
+            </button>
+
+            <br><br>
+
+            <label>
+                Upload Ingredient Image
+            </label>
+
+            {{ form.image }}
+
+            <br><br>
+
+            <button type="submit">
+
+                Generate Recipe
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if recipe %}
+
+    <div class="recipe-box">
+
+        <h2>
+            Generated Recipe
+        </h2>
+
+        <pre>{{ recipe }}</pre>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>
